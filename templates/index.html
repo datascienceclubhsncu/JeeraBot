@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+    <meta name="theme-color" content="#4D0B5A">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Jeera College Bot">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description"
+        content="HSNC University College Bot: Your smart guide for quick access to academic resources, course details, and student support, enhancing your university experience efficiently.">
+    <title>Jeera Bot</title>
+    <link rel="manifest" href="/assets/manifest.json">
+    <link rel="icon" href="/assets/icons/r_logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/icons/r_logo.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
+        integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <main role='main'>
+        <div id="chatbot">
+            <nav class='header'>
+                <i class='fa fa-ellipsis-v' id='menu-btn'></i>
+                <img src='/assets/icons/hsnc_logo.png' width='110' style='position: relative; left:0;top:.2rem' />
+                <hr>
+                <h1 class='logo'>Jeera bot</h1>
+                <img src='/assets/icons/sas_logo.png' width='60' style='position: absolute; right:1.3rem;top:.7rem' />
+            </nav>
+            <nav class="nav-menu" id="menu">
+                <ul>
+                    <li><a href="javascript:clearChat()"><i class="fa fa-trash-o"></i>&nbsp;Clear Chat</a></li>
+                </ul>
+            </nav>
+            <div class='bg-logo'>
+                <img src='/assets/icons/r_logo.png' />
+            </div>
+            <div id='chats' class="messages">
+            </div>
+            <div class="chat-input-container">
+                <div class="chat-box">
+                    <textarea type="text" class="chat-input" placeholder="Type your message..." autofocus
+                        rows='1'></textarea>
+                    <button class="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="offlinePopup" class="offline-popup hidden">
+        <p>You are offline. Connect to the internet.</p>
+    </div>
+
+    <div id="pwa-banner" class="pwa-banner">
+        <div class="pwa-content">
+            <p>Add this app to your home screen for a better experience.</p>
+            <button id="install-btn" class="install-btn">Install</button>
+            <button id="close-btn" class="close-btn">&times;</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.16/marked.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+
+</html>
