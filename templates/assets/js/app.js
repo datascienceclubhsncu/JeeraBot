@@ -30,6 +30,12 @@ function showOfflinePopup() {
  window.addEventListener('beforeinstallprompt', (e) => {
    e.preventDefault();
    deferredPrompt = e;
+   document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+         document.getElementById('pwa-banner').style.opacity = '0';
+         document.getElementById('pwa-banner').style.bottom = '-200px';
+      }
+   })
    document.getElementById('pwa-banner').style.opacity = '1';
    document.getElementById('pwa-banner').style.bottom = '0';
  });

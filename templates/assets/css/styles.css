@@ -398,6 +398,7 @@ html {
 table {
   width: 100%;
   border-collapse: collapse;
+  overflow: hidden;
   margin: 20px 0;
 }
 table, th, td {

@@ -54,11 +54,11 @@ function submitData() {
             botResponse.innerHTML = '<img src=\'/assets/icons/r_logo.png\'/>\n<p>Loading ....  </p>';
         }
 
-        setTimeout(() => {
-            botResponse.querySelector('p').innerHTML = getResponse(userMessage);
+        chat(userMessage, 'chat_id').then(response => {
+            botResponse.querySelector('p').innerHTML = converter.makeHtml(response);
             formatCode();
             window.scrollBy(0, document.body.scrollHeight * 1000000);
-        }, 1000);
+        });
 
         input_box.rows = 1;
         input_box.value = '';
@@ -123,17 +123,10 @@ input_box.addEventListener('input', () => {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === '/') {
-        event.preventDefault();
         input_box.focus();
     }
 });
 
-
-function getResponse(message) {
-    var response = 'Bot response to your message: \n' + message;
-    html = converter.makeHtml(response);
-    return html
-}
 
 function formatCode() {
     document.querySelectorAll('.message.bot.no-code code').forEach((originalCode) => {

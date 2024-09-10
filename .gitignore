@@ -1,2 +1,4 @@
 env/
+server.py
 templates/CNAME
+.vercel

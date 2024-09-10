@@ -35,6 +35,7 @@ query_engine = index.as_query_engine(
     llm=llm,
 )
 
-while (prompt := input("Ask anything? ")) !='q':
-    response= query_engine.query(prompt)
-    print(response)
+if __name__ == '__main__':
+    while (prompt := input("Ask anything? ")) !='q':
+        response= query_engine.query(prompt)
+        print(response)
