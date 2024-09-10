@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify, render_template
 from llamaparse.parse import query_engine
 import secrets
+import logging
 
+#initialize flask
 app = Flask(__name__, static_folder='templates/assets', static_url_path='/assets')
 
-conversations = {}
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+conversations = {}
 
 def chat(message, user):
     bot_name = "Jeera Bot"
@@ -20,11 +23,15 @@ def chat(message, user):
         response = query_engine.query(message)
         conversations[user['chat_id']].append({'role': 'user', 'content': message})
         conversations[user['chat_id']].append({'role': 'assistant', 'content': response})
+        
+        # Log user message and bot response
+        logging.info(f"User {user['chat_id']} ({user['name']}): {message}")
+        logging.info(f"Bot response: {response}")
+
         return response
     except Exception as e:
-        print("Error:", e)
+        logging.error(f"Error processing request for user {user['chat_id']}: {e}")
         return "Error in processing request"
-
 
 @app.route('/')
 def chatbot():
@@ -39,8 +46,13 @@ def chat_endpoint():
         'chat_id': secrets.token_hex(16)
     }
 
-    response = chat(message, user)
+    response = str(chat(message, user))
+    logging.info(f"Request from user {user['chat_id']}: {message}")
+    
     return jsonify({'response': response})
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
+
+
+

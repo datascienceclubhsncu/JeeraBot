@@ -25,7 +25,7 @@ llm= Groq(
 
 file_extractor={'.pdf': parser}
 
-sub_doc=SimpleDirectoryReader(input_dir='data', file_extractor=file_extractor)
+sub_doc=SimpleDirectoryReader(input_dir='llamaparse/data', file_extractor=file_extractor)
 documents= sub_doc.load_data()
 
 index= VectorStoreIndex.from_documents(documents=documents)
