@@ -3,8 +3,9 @@ from llamaparse.parse import query_engine
 import secrets
 import logging
 
+
 #initialize flask
-app = Flask(__name__, static_folder='templates/assets', static_url_path='/assets')
+app = Flask(__name__, static_folder='static', static_url_path='/')
 
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -22,13 +23,13 @@ def chat(message, user):
     try:
         response = query_engine.query(message)
         conversations[user['chat_id']].append({'role': 'user', 'content': message})
-        conversations[user['chat_id']].append({'role': 'assistant', 'content': response})
+        conversations[user['chat_id']].append({'role': 'assistant', 'content': response.response})
         
         # Log user message and bot response
         logging.info(f"User {user['chat_id']} ({user['name']}): {message}")
-        logging.info(f"Bot response: {response}")
+        logging.info(f"Bot response: {response.response}")
 
-        return response
+        return response.response
     except Exception as e:
         logging.error(f"Error processing request for user {user['chat_id']}: {e}")
         return "Error in processing request"
@@ -46,7 +47,7 @@ def chat_endpoint():
         'chat_id': secrets.token_hex(16)
     }
 
-    response = str(chat(message, user))
+    response = chat(message, user)
     logging.info(f"Request from user {user['chat_id']}: {message}")
     
     return jsonify({'response': response})
