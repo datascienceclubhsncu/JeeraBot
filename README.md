@@ -1,17 +1,24 @@
-# JeeraBot
-Chatbot for SAS
+# **🌿 JeeraBot**
+### Chatbot for **SAS** 🛠️
 
-> Commands to run llamaparse
+---
 
+### 📦 **Installation Instructions**
+
+> First, install all the required packages with the following command:
 
 ```bash
 pip install -r requirements.txt
 ```
+
 ---
+
+### 🚀 **Run the Server**
+
+> Use this command to start the server:
+
 ```bash
-cd llamaparse
+python main.py
 ```
+
 ---
-```python
-python parse.py
-```
