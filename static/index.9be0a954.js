@@ -18,4 +18,10 @@ async function chat(message) {
     }
 }
 
+function clearChat() {
+    chats.innerHTML = '';
+    chatbot.classList.remove('new');
+    bg_logo.style.transform = `none`;
+}
+
 //# sourceMappingURL=index.9be0a954.js.map
