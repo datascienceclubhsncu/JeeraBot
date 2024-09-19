@@ -6,7 +6,7 @@ from llama_index.llms.groq import Groq
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
-import openpyxl  # Ensure this is installed
+import openpyxl
 
 # Load environment variables
 load_dotenv()
@@ -28,14 +28,15 @@ parser = LlamaParse(result_type='markdown')
 @st.cache_resource(show_spinner=False)
 def load_model():
     logger.info("Loading the model...")
-    return Groq(model="llama2-7b")  # Still using a smaller language model
+    # Replace 'valid-model-name' with a correct, available model name
+    return Groq(model="valid-model-name")
 
 llm = load_model()
 
 # Map file types to the parser
 file_extractor = {'.pdf': parser, '.xlsx': parser}
 
-# Load documents lazily and cache, with error handling for rate limit
+# Load documents lazily and cache
 @st.cache_resource(show_spinner=False)
 def load_documents():
     try:
@@ -70,8 +71,8 @@ def create_query_engine():
 query_engine = create_query_engine()
 
 # Streamlit app setup
-st.title("LlamaParse Query Interface")
-st.write("Ask anything and receive responses based on your indexed data.")
+st.title("JEERA-BOT")
+st.write("Ask anything related to School of Applied Sciences.")
 
 # Health check (to verify app is running)
 try:
