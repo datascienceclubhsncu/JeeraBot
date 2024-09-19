@@ -6,6 +6,7 @@ from llama_index.llms.groq import Groq
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
+import openpyxl  # Ensure this is installed
 
 # Load environment variables
 load_dotenv()
@@ -32,20 +33,27 @@ def load_model():
 llm = load_model()
 
 # Map file types to the parser
-file_extractor = {'.pdf': parser}
+file_extractor = {'.pdf': parser, '.xlsx': parser}
 
-# Load documents lazily and cache
+# Load documents lazily and cache, with error handling for rate limit
 @st.cache_resource(show_spinner=False)
 def load_documents():
-    logger.info("Loading documents from the directory...")
-    sub_doc = SimpleDirectoryReader(input_dir='llamaparse/data', file_extractor=file_extractor)
-    return sub_doc.load_data()
+    try:
+        logger.info("Loading documents from the directory...")
+        sub_doc = SimpleDirectoryReader(input_dir='llamaparse/data', file_extractor=file_extractor)
+        return sub_doc.load_data()
+    except Exception as e:
+        logger.error(f"Error loading documents: {e}")
+        st.error(f"Error loading documents: {e}")
+        return []
 
 documents = load_documents()
 
 # Create an index from the documents using a vector store and cache
 @st.cache_resource(show_spinner=False)
 def create_index():
+    if not documents:
+        return None
     logger.info("Creating a vector store index...")
     return VectorStoreIndex.from_documents(documents=documents)
 
@@ -54,6 +62,8 @@ index = create_index()
 # Create a query engine for the index
 @st.cache_resource(show_spinner=False)
 def create_query_engine():
+    if not index:
+        return None
     logger.info("Creating query engine...")
     return index.as_query_engine(llm=llm)
 
@@ -75,7 +85,7 @@ except Exception as health_check_error:
 user_input = st.text_input("Ask a question:")
 
 # Process the query when the user enters a question
-if user_input:
+if user_input and query_engine:
     with st.spinner('Processing your query...'):
         try:
             # Query the model
@@ -86,3 +96,6 @@ if user_input:
         except Exception as e:
             st.error(f"An error occurred while querying: {e}")
             logger.error(f"Query error: {e}")
+else:
+    if not query_engine:
+        st.warning("Unable to process your query due to document load failure or API rate limit exceeded.")
