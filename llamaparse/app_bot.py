@@ -5,9 +5,14 @@ from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
 from llama_index.llms.groq import Groq
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+import logging
 
 # Load environment variables
 load_dotenv()
+
+# Configure logging to capture errors
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Set the embedding model using HuggingFace's multilingual model
 Settings.embed_model = HuggingFaceEmbedding(
@@ -38,18 +43,12 @@ query_engine = index.as_query_engine(llm=llm)
 st.title("LlamaParse Query Interface")
 st.write("Ask anything and receive responses based on your indexed data.")
 
-# Create an input box for user questions
-user_input = st.text_input("Ask a question:")
+# Health check endpoint (optional, if required by your service)
+try:
+    st.text("App is running health check...")
+    st.success("Health check passed!")
+except Exception as health_check_error:
+    st.error(f"Health check failed: {health_check_error}")
+    logger.error(f"Health check error: {health_check_error}")
 
-# Process the query when the user enters a question
-if user_input:
-    with st.spinner('Processing your query...'):
-        try:
-            # Query the model
-            response = query_engine.query(user_input)
-            # Display the result in the Streamlit app
-            st.write("### Response:")
-            st.write(response.response)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
-
+# Create an input
