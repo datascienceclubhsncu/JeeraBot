@@ -14,10 +14,10 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Set the embedding model using HuggingFace's multilingual model
+# Set the embedding model using a smaller HuggingFace model to save resources
 Settings.embed_model = HuggingFaceEmbedding(
-    model_name="Alibaba-NLP/gte-multilingual-base",
-    trust_remote_code=True
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    trust_remote_code=False  # Not needed for this smaller model
 )
 
 # Set up a parser
@@ -27,7 +27,7 @@ parser = LlamaParse(result_type='markdown')
 @st.cache_resource(show_spinner=False)
 def load_model():
     logger.info("Loading the model...")
-    return Groq(model="llama2-7b")  # Using a smaller model for testing
+    return Groq(model="llama2-7b")  # Still using a smaller language model
 
 llm = load_model()
 
@@ -86,4 +86,3 @@ if user_input:
         except Exception as e:
             st.error(f"An error occurred while querying: {e}")
             logger.error(f"Query error: {e}")
-
