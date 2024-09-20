@@ -29,7 +29,7 @@ parser = LlamaParse(result_type='markdown')
 def load_model():
     logger.info("Loading the model...")
     # Replace 'valid-model-name' with a correct, available model name
-    return Groq(model="llama2-7b")
+    return Groq(model="llama3-70b-8192")
 
 llm = load_model()
 
