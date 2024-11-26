@@ -7,8 +7,8 @@ from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
 
-# Set page configuration at the top
-st.set_page_config(page_title="JEERA-BOT", layout="centered", icon="🤖")
+# Set page configuration at the very start
+st.set_page_config(page_title="JEERA-BOT", layout="centered", icon="📚")
 
 # Load environment variables
 load_dotenv()
