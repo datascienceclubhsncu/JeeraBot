@@ -69,7 +69,7 @@ def create_query_engine():
 
 query_engine = create_query_engine()
 
-st.set_page_config(page_title="JEERA-BOT", layout="centered")
+st.set_page_config(page_title="JEERA-BOT", layout="centered", icon="🤖")
 
 # Radio button to select view mode
 view_mode = st.radio("Select View Mode:", ("Desktop", "Mobile"))
@@ -98,7 +98,7 @@ if view_mode == "Desktop":
 elif view_mode == "Mobile":
     # Mobile layout with vertical alignment
     st.image("llamaparse/data/Logo_HSNC.png", width=30)
-    st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>JEERA-BOT</h2>", unsafe_allow_html=True)
     st.image("llamaparse/data/Logo_SAS.png", width=30)
 
     # Centered description text for mobile view with smaller font size
