@@ -76,9 +76,9 @@ st.set_page_config(page_title="JEERA-BOT", page_icon="🤖", layout="centered")
 # Add logos at the top corners
 col1, col2, col3 = st.columns([1, 5, 1])
 with col1:
-    st.image("logo.png", width=100)  # Replace with your logo path
+    st.image("llamaparse/Logo.png", width=100)  # Replace with your logo path
 with col3:
-    st.image("logo_SAS.png", width=100)  # Replace with your logo path
+    st.image("llamaparse/Logo_SAS.png", width=100)  # Replace with your logo path
 
 # Title and introduction text
 st.title("JEERA-BOT")
