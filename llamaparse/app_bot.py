@@ -90,18 +90,6 @@ Hi, this chatbot is made by Members of the Research Cell, School of Applied Scie
 </p>
 """, unsafe_allow_html=True)
 
-# Informational message below the title
-st.markdown(
-    """
-    <div style='text-align: center; font-size: 16px; margin-bottom: 20px;'>
-        Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. 
-        This is a beta version currently in testing, so answers might not be completely accurate. 
-        Please share your feedback at <b>datascience.club@hsncu.edu.in</b> or on our LinkedIn page 
-        <a href='https://www.linkedin.com/in/r-cell--sas' target='_blank'>www.linkedin.com/in/r-cell--sas</a>. Thank You!
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 # Input box for user query
 user_input = st.text_input("Ask a question:")
