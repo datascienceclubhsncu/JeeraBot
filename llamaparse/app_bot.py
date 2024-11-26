@@ -71,16 +71,28 @@ def create_query_engine():
 query_engine = create_query_engine()
 
 # Streamlit app setup
-st.title("JEERA-BOT")
-st.write("Ask anything related to School of Applied Sciences.")
+st.set_page_config(page_title="JEERA-BOT", page_icon="🤖", layout="centered")
 
-# Health check (to verify app is running)
-try:
-    st.text("App is running health check...")
-    st.success("Health check passed!")
-except Exception as health_check_error:
-    st.error(f"Health check failed: {health_check_error}")
-    logger.error(f"Health check error: {health_check_error}")
+# Add logos at the top corners
+col1, col2, col3 = st.columns([1, 5, 1])
+with col1:
+    st.image("logo.png", width=100)  # Replace with your logo path
+with col3:
+    st.image("logo_SAS.png", width=100)  # Replace with your logo path
+
+# Title and introduction text
+st.title("JEERA-BOT")
+st.markdown(
+    """
+    <div style="text-align: center; margin-top: 20px;">
+        <p>Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. 
+        This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at 
+        <b>datascience.club@hsncu.edu.in</b> or on our LinkedIn page: 
+        <a href="https://www.linkedin.com/in/r-cell--sas" target="_blank">www.linkedin.com/in/r-cell--sas</a>. Thank You!</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Create an input box for user questions
 user_input = st.text_input("Ask a question:")
