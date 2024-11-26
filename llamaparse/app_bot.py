@@ -108,7 +108,7 @@ elif view_mode == "Mobile":
     </p>
     """, unsafe_allow_html=True)
 
-st.text_input("Ask a question:")
+user_input = st.text_input("Ask a question:")
 
 # Process the query when the user enters a question
 if user_input and query_engine:
