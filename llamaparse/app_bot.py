@@ -69,26 +69,26 @@ def create_query_engine():
 
 query_engine = create_query_engine()
 
-# Streamlit app setup
-st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for better alignment
+st.set_page_config(page_title="JEERA-BOT", layout="centered")
 
-# Default to Mobile View
-col1, col3 = st.columns([1, 1])
+# Layout for logos
+col1, col2, col3 = st.columns([1, 2, 1])  # Adjust the column ratios for better spacing
 
-# Display logos with mobile settings (use_column_width=True)
 with col1:
-    st.image("llamaparse/data/Logo_HSNC.png", width=100)
+    st.image("llamaparse/data/Logo_HSNC.png", width=80)
+
+with col2:
+    st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
 
 with col3:
-    st.image("llamaparse/data/Logo_SAS.png", width=100)
+    st.image("llamaparse/data/Logo_SAS.png", width=80)
 
-# Title in the center
-st.markdown(
-    """
-    <h1 style='text-align: center; margin-top: -50px;'>JEERA-BOT</h1>
-    """,
-    unsafe_allow_html=True,
-)
+# Description text centred
+st.markdown("""
+<p style="text-align: center;">
+Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
+</p>
+""", unsafe_allow_html=True)
 
 # Informational message below the title
 st.markdown(
