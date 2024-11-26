@@ -6,6 +6,11 @@ from llama_index.llms.groq import Groq
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
+import os
+
+# Get the absolute path of the images
+logo_hsnc_path = os.path.join(os.getcwd(), "llamaparse", "data", "Logo_HSNC.png")
+logo_sas_path = os.path.join(os.getcwd(), "llamaparse", "data", "Logo_SAS.png")
 
 # Set page configuration at the very start
 st.set_page_config(page_title="JEERA-BOT", layout="centered")
@@ -95,12 +100,7 @@ if view_mode == "Desktop":
     Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
     </p>
     """, unsafe_allow_html=True)
-import os
-
-# Get the absolute path of the images
-logo_hsnc_path = os.path.join(os.getcwd(), "llamaparse", "data", "Logo_HSNC.png")
-logo_sas_path = os.path.join(os.getcwd(), "llamaparse", "data", "Logo_SAS.png")
-
+    
 elif view_mode == "Mobile":
     # CSS to align the images and title in a single line
     st.markdown("""
