@@ -7,6 +7,8 @@ from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
 
+st.set_page_config(page_title="JEERA-BOT", layout="centered", icon="🤖")
+
 # Load environment variables
 load_dotenv()
 
@@ -69,7 +71,6 @@ def create_query_engine():
 
 query_engine = create_query_engine()
 
-st.set_page_config(page_title="JEERA-BOT", layout="centered", icon="🤖")
 
 # Radio button to select view mode
 view_mode = st.radio("Select View Mode:", ("Desktop", "Mobile"))
