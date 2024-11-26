@@ -72,23 +72,23 @@ query_engine = create_query_engine()
 # Streamlit app setup
 st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for better alignment
 
-# Add a sidebar checkbox for mobile view
-is_mobile = st.sidebar.checkbox("Enable mobile view")
+# Ask the user to select mobile or desktop view
+view_mode = st.radio("Select view mode:", ["Desktop", "Mobile"], index=0)
 
-# Set image width based on the view selected by the user
-if is_mobile:
-    img_width = 150  # Smaller size for mobile
-else:
-    img_width = 300  # Larger size for desktop
-
-# Top section with logos in two columns
+# Adjust the display of images based on the selected view mode
 col1, col3 = st.columns([1, 1])
 
 with col1:
-    st.image("llamaparse/Logo.png", width=img_width)  # Left logo
+    if view_mode == "Mobile":
+        st.image("llamaparse/Logo.png", use_column_width=True)  # Auto-adjust for mobile
+    else:
+        st.image("llamaparse/Logo.png", width=300)  # Fixed width for desktop
 
 with col3:
-    st.image("llamaparse/Logo_SAS.png", width=img_width)  # Right logo
+    if view_mode == "Mobile":
+        st.image("llamaparse/Logo_SAS.png", use_column_width=True)  # Auto-adjust for mobile
+    else:
+        st.image("llamaparse/Logo_SAS.png", width=300)  # Fixed width for desktop
 
 # Title in the center
 st.markdown(
