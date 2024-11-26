@@ -76,10 +76,10 @@ st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for bet
 col1, col2, col3 = st.columns([1, 6, 1])  # Adjust column ratios
 
 with col1:
-    st.image("llamaparse/Logo.png", use_column_width=200)  # Left logo
+    st.image("llamaparse/Logo.png", use_column_width=500)  # Left logo
 
 with col3:
-    st.image("llamaparse/Logo_SAS.png", use_column_width=200)  # Right logo
+    st.image("llamaparse/Logo_SAS.png", use_column_width=500)  # Right logo
 
 # Title in the center
 st.markdown(
