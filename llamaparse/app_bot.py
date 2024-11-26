@@ -71,28 +71,42 @@ query_engine = create_query_engine()
 
 st.set_page_config(page_title="JEERA-BOT", layout="centered")
 
-# Layout for logos
-col1, col2, col3 = st.columns([1, 2, 1])  # Adjust the column ratios for better spacing
+# Radio button to select view mode
+view_mode = st.radio("Select View Mode:", ("Desktop", "Mobile"))
 
-with col1:
-    st.image("llamaparse/data/Logo_HSNC.png", width=80)
+# Set layout adjustments based on the selected view mode
+if view_mode == "Desktop":
+    # Desktop layout with centered alignment
+    col1, col2, col3 = st.columns([1, 2, 1])  # Adjusted column ratios for Desktop
 
-with col2:
+    with col1:
+        st.image("path/to/HSNC_Logo.png", width=80)
+
+    with col2:
+        st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
+
+    with col3:
+        st.image("llamaparse/data/Logo_SAS.png", width=80)
+
+    # Centered description text
+    st.markdown("""
+    <p style="text-align: center;">
+    Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
+    </p>
+    """, unsafe_allow_html=True)
+
+elif view_mode == "Mobile":
+    # Mobile layout with vertical alignment
+    st.image("llamaparse/data/Logo_HSNC.png", width=60)
     st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
+    st.image("path/to/SAS_Logo.png", width=60)
 
-with col3:
-    st.image("llamaparse/data/Logo_SAS.png", width=80)
-
-# Description text centred
-st.markdown("""
-<p style="text-align: center;">
-Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
-</p>
-""", unsafe_allow_html=True)
-
-
-# Input box for user query
-user_input = st.text_input("Ask a question:")
+    # Centered description text for mobile view with smaller font size
+    st.markdown("""
+    <p style="text-align: center; font-size: 14px;">
+    Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
+    </p>
+    """, unsafe_allow_html=True)
 
 # Process the query when the user enters a question
 if user_input and query_engine:
