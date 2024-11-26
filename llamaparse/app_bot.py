@@ -72,28 +72,20 @@ query_engine = create_query_engine()
 # Streamlit app setup
 st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for better alignment
 
-# Ask the user to select mobile or desktop view
-view_mode = st.radio("Select view mode:", ["Desktop", "Mobile"], index=0)
-
-# Adjust the display of images based on the selected view mode
+# Default to Mobile View
 col1, col3 = st.columns([1, 1])
 
+# Display logos with mobile settings (use_column_width=True)
 with col1:
-    if view_mode == "Mobile":
-        st.image("llamaparse/Logo.png", use_column_width=True)  # Auto-adjust for mobile
-    else:
-        st.image("llamaparse/Logo.png", width=300)  # Fixed width for desktop
+    st.image("llamaparse/Logo.png", use_column_width=True)
 
 with col3:
-    if view_mode == "Mobile":
-        st.image("llamaparse/Logo_SAS.png", use_column_width=True)  # Auto-adjust for mobile
-    else:
-        st.image("llamaparse/Logo_SAS.png", width=300)  # Fixed width for desktop
+    st.image("llamaparse/Logo_SAS.png", use_column_width=True)
 
 # Title in the center
 st.markdown(
     """
-    <h1 style='text-align: center; margin-top: -50px;'>JEERA-BOT (Joint Exploration and Evaluation of Resources and Analytics)</h1>
+    <h1 style='text-align: center; margin-top: -50px;'>JEERA-BOT</h1>
     """,
     unsafe_allow_html=True,
 )
