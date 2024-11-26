@@ -102,33 +102,10 @@ if view_mode == "Desktop":
     """, unsafe_allow_html=True)
     
 elif view_mode == "Mobile":
-    # CSS to align the images and title in a single line
-    st.markdown("""
-    <style>
-    .header-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .logo {
-        height: 30px;
-        margin: 0 10px; /* Add spacing around logos */
-    }
-    .title {
-        font-size: 24px;
-        font-weight: bold;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    # Header with logos and title
-    st.markdown("""
-    <div class="header-container">
-        <img src="llamaparse/data/Logo_HSNC.png" class="logo" />
-        <span class="title">JEERA-BOT</span>
-        <img src="llamaparse/data/Logo_SAS.png" class="logo" />
-    </div>
-    """, unsafe_allow_html=True)
+    # Mobile layout with vertical alignment
+    st.image("llamaparse/data/Logo_HSNC.png", width=60)
+    st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
+    st.image("llamaparse/data/Logo_SAS.png", width=60)
 
     # Centered description text for mobile view with smaller font size
     st.markdown("""
