@@ -84,7 +84,7 @@ if view_mode == "Desktop":
         st.image("llamaparse/data/Logo_HSNC.png", width=80)
 
     with col2:
-        st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 >JEERA-BOT</h1>", unsafe_allow_html=True)
 
     with col3:
         st.image("llamaparse/data/Logo_SAS.png", width=80)
