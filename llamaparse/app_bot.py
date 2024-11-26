@@ -72,14 +72,23 @@ query_engine = create_query_engine()
 # Streamlit app setup
 st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for better alignment
 
-# Top section with logos
-col1, col2, col3 = st.columns([1, 6, 1])  # Adjust column ratios
+# Add a sidebar checkbox for mobile view
+is_mobile = st.sidebar.checkbox("Enable mobile view")
+
+# Set image width based on the view selected by the user
+if is_mobile:
+    img_width = 150  # Smaller size for mobile
+else:
+    img_width = 300  # Larger size for desktop
+
+# Top section with logos in two columns
+col1, col3 = st.columns([1, 1])
 
 with col1:
-    st.image("llamaparse/Logo.png", use_column_width=500)  # Left logo
+    st.image("llamaparse/Logo.png", width=img_width)  # Left logo
 
 with col3:
-    st.image("llamaparse/Logo_SAS.png", use_column_width=500)  # Right logo
+    st.image("llamaparse/Logo_SAS.png", width=img_width)  # Right logo
 
 # Title in the center
 st.markdown(
@@ -120,5 +129,3 @@ if user_input and query_engine:
 else:
     if not query_engine:
         st.warning("Unable to process your query due to document load failure or API rate limit exceeded.")
-
-
