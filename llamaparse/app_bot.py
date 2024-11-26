@@ -6,7 +6,6 @@ from llama_index.llms.groq import Groq
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 import logging
-import openpyxl
 
 # Load environment variables
 load_dotenv()
@@ -18,21 +17,25 @@ logger = logging.getLogger(__name__)
 # Set the embedding model using a smaller HuggingFace model to save resources
 Settings.embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
-    trust_remote_code=False
+    trust_remote_code=False  # Not needed for this smaller model
 )
 
 # Set up a parser
 parser = LlamaParse(result_type='markdown')
 
+# Lazy load the model to reduce initial load time and cache it
 @st.cache_resource(show_spinner=False)
 def load_model():
     logger.info("Loading the model...")
+    # Replace 'valid-model-name' with a correct, available model name
     return Groq(model="llama3-70b-8192")
 
 llm = load_model()
 
+# Map file types to the parser
 file_extractor = {'.pdf': parser, '.xlsx': parser}
 
+# Load documents lazily and cache
 @st.cache_resource(show_spinner=False)
 def load_documents():
     try:
@@ -46,6 +49,7 @@ def load_documents():
 
 documents = load_documents()
 
+# Create an index from the documents using a vector store and cache
 @st.cache_resource(show_spinner=False)
 def create_index():
     if not documents:
@@ -55,6 +59,7 @@ def create_index():
 
 index = create_index()
 
+# Create a query engine for the index
 @st.cache_resource(show_spinner=False)
 def create_query_engine():
     if not index:
@@ -64,68 +69,49 @@ def create_query_engine():
 
 query_engine = create_query_engine()
 
-st.set_page_config(page_title="JEERA-BOT", page_icon="🤖", layout="wide")
+# Streamlit app setup
+st.set_page_config(page_title="JEERA-BOT", layout="wide")  # Wide layout for better alignment
 
-# Align logos at the top with proper sizing
+# Top section with logos
+col1, col2, col3 = st.columns([1, 6, 1])  # Adjust column ratios
+
+with col1:
+    st.image("llamaparse/Logo.png", use_column_width=True)  # Left logo
+
+with col3:
+    st.image("llamaparse/Logo_SAS.png", use_column_width=True)  # Right logo
+
+# Title in the center
 st.markdown(
     """
-    <style>
-        .logo-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .logo {
-            max-height: 80px;
-        }
-        .center-text {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 16px;
-        }
-        .title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 36px;
-        }
-    </style>
+    <h1 style='text-align: center; margin-top: -50px;'>JEERA-BOT (Joint Exploration and Evaluation of Resources and Analytics)</h1>
     """,
     unsafe_allow_html=True,
 )
 
-# Logos
+# Informational message below the title
 st.markdown(
     """
-    <div class="logo-container">
-        <img src="llamaparse/Logo.png" class="logo">
-        <img src="llamaparse/Logo_SAS.png" class="logo">
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Title and introduction
-st.markdown(
-    """
-    <div class="title">JEERA-BOT(Joint Exploration and Evaluation of Resources and Analytics)</div>
-    <div class="center-text">
+    <div style='text-align: center; font-size: 16px; margin-bottom: 20px;'>
         Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. 
-        This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at 
-        <b>datascience.club@hsncu.edu.in</b> or on our LinkedIn page: 
-        <a href="https://www.linkedin.com/in/r-cell--sas" target="_blank">www.linkedin.com/in/r-cell--sas</a>. Thank You!
+        This is a beta version currently in testing, so answers might not be completely accurate. 
+        Please share your feedback at <b>datascience.club@hsncu.edu.in</b> or on our LinkedIn page 
+        <a href='https://www.linkedin.com/in/r-cell--sas' target='_blank'>www.linkedin.com/in/r-cell--sas</a>. Thank You!
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# Input box for questions
+# Input box for user query
 user_input = st.text_input("Ask a question:")
 
+# Process the query when the user enters a question
 if user_input and query_engine:
     with st.spinner('Processing your query...'):
         try:
+            # Query the model
             response = query_engine.query(user_input)
+            # Display the result in the Streamlit app
             st.write("### Response:")
             st.write(response.response)
         except Exception as e:
@@ -134,6 +120,5 @@ if user_input and query_engine:
 else:
     if not query_engine:
         st.warning("Unable to process your query due to document load failure or API rate limit exceeded.")
-
 
 
