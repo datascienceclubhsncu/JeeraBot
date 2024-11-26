@@ -77,7 +77,7 @@ col1, col3 = st.columns([1, 1])
 
 # Display logos with mobile settings (use_column_width=True)
 with col1:
-    st.image("llamaparse/Logo.png", use_column_width=True)
+    st.image("llamaparse/Logo_HSNC.png", use_column_width=True)
 
 with col3:
     st.image("llamaparse/Logo_SAS.png", use_column_width=True)
