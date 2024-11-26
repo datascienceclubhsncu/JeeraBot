@@ -97,9 +97,9 @@ if view_mode == "Desktop":
 
 elif view_mode == "Mobile":
     # Mobile layout with vertical alignment
-    st.image("llamaparse/data/Logo_HSNC.png", width=60)
+    st.image("llamaparse/data/Logo_HSNC.png", width=30)
     st.markdown("<h1 style='text-align: center;'>JEERA-BOT</h1>", unsafe_allow_html=True)
-    st.image("llamaparse/data/Logo_SAS.png", width=60)
+    st.image("llamaparse/data/Logo_SAS.png", width=30)
 
     # Centered description text for mobile view with smaller font size
     st.markdown("""
