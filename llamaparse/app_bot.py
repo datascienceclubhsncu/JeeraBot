@@ -97,10 +97,33 @@ if view_mode == "Desktop":
     """, unsafe_allow_html=True)
 
 elif view_mode == "Mobile":
-    # Mobile layout with vertical alignment
-    st.image("llamaparse/data/Logo_HSNC.png", width=30)
-    st.markdown("<h2 style='text-align: center;'>JEERA-BOT</h2>", unsafe_allow_html=True)
-    st.image("llamaparse/data/Logo_SAS.png", width=30)
+    # CSS to align the images and title in a single line
+    st.markdown("""
+    <style>
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .logo {
+        height: 30px;
+        margin: 0 10px; /* Add spacing around logos */
+    }
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Header with logos and title
+    st.markdown("""
+    <div class="header-container">
+        <img src="llamaparse/data/Logo_HSNC.png" class="logo" />
+        <span class="title">JEERA-BOT</span>
+        <img src="llamaparse/data/Logo_SAS.png" class="logo" />
+    </div>
+    """, unsafe_allow_html=True)
 
     # Centered description text for mobile view with smaller font size
     st.markdown("""
@@ -108,6 +131,7 @@ elif view_mode == "Mobile":
     Hi, this chatbot is made by Members of the Research Cell, School of Applied Sciences, HSNC University, Mumbai. This is a beta version currently in testing, so answers might not be completely accurate. Please share your feedback at <a href="mailto:datascience.club@hsncu.edu.in">datascience.club@hsncu.edu.in</a> or on our LinkedIn page <a href="https://www.linkedin.com/in/r-cell--sas">www.linkedin.com/in/r-cell--sas</a>. Thank you!
     </p>
     """, unsafe_allow_html=True)
+
 
 # Capture user input
 user_input = st.text_input("Ask a question:")
